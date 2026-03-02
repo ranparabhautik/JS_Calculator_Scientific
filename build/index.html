@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-YSKpKQa2H8YbP4VxIhuXy5kc+vYj4Nc8cSL+XkQv7qx+3y3P4nN5xwvmjABLmvF/" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+
+<body style="height: 90vh;">
+    <!-- Full screen -->
+    <div class="container-fluid bg-light" name="FULL SCREEN">
+        <!-- Hamburger for standard and scientific calc -->
+        <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="offcanvas offcanvas-start bg-light" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div class="btn fs-3 p-2 m-2" id="offcanvas-standard">
+                    Standard
+                </div><br>
+                <div class="btn fs-3 p-2 m-2" id="offcanvas-scientific">
+                    Scientific
+                </div>
+                <hr>
+
+                <!-- Dark mode in the calculator using css -->
+                <div class="form-check form-switch fs-4 m-2">
+                    <input class="form-check-input" type="checkbox" id="darkModeToggle">
+                    <label class="form-check-label">Dark Mode
+                    </label>
+                </div>
+
+
+                <!-- Dark mode in the calculator using Bootstrap -->
+
+
+
+
+
+                <!-- <div class="dropdown mt-3">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Dropdown button
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Calculator Full -->
+        <div class="d-flex flex-row bg-light" name="Calculator">
+            <!-- Left part for calculation -->
+            <div class="col-12 col-lg-9 d-flex flex-column " style="height: 95vh" name="Left part">
+                <!-- for input -->
+                <div class="text-end align-content-center mb-2 p-4 bg-light" style="height: 80px;" id="expression"></div>
+                <!-- for answer -->
+                <div class="text-end align-content-center mb-2 p-4 bg-light display-1" style="height: 120px;" id="result"> 0
+                </div>
+                <!-- for memory operations -->
+                <div class="row d-flex text-start column-gap-1 bg-light" id="scientific-deg">
+                    <div class="d-flex flex-row mb-2">
+                        <button class="btn bg-transparent col-1">DEG</button>
+                        <button class="btn bg-transparent col-1">F-E</button>
+                    </div>
+                </div>
+                <div class="row d-flex text-start mb-2 bg-light">
+                    <div class="d-flex flex-row">
+                        <button class="btn bg-transparent col-1" disabled>MC</button>
+                        <button class="btn bg-transparent col-1" disabled>MR</button>
+                        <button class="btn bg-transparent col-1">M+</button>
+                        <button class="btn bg-transparent col-1">M-</button>
+                        <button class="btn bg-transparent col-1">MS</button>
+
+                    </div>
+                </div>
+
+                <div id="scientific-trigo">
+                    <div class="btn-group bg-light">
+                        <button class="btn btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="bi bi-caret-up"></i>Trigonometry
+                        </button>
+                        <ul class="dropdown-menu pt-2 p-0" style="width: 300px;">
+                            <div class="container-fluid">
+
+                                <div class="row g-1 mb-2">
+                                    <div class="col-3">
+                                        <button
+                                            class="btn btn-outline-info w-100 d-flex justify-content-center align-items-center calc-btn" data-value="">
+                                            2 <sup>nd</sup>
+                                        </button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center calc-btn" data-value="Math.sinh(">
+                                            sin
+                                        </button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center calc-btn" data-value="Math.cosh(">
+                                            cos
+                                        </button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center calc-btn" data-value="Math.tanh(">
+                                            tan
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row g-1 mb-2">
+                                    <div class="col-3">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center calc-btn" data-value="Math.hyp(">
+                                            hyp
+                                        </button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center calc-btn" data-value="Math.sech(">
+                                            sec
+                                        </button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center calc-btn" data-value="Math.cosech(">
+                                            csc
+                                        </button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center calc-btn" data-value="Math.coth(">
+                                            cot
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+
+                    <div class="btn-group bg-light">
+                        <button class="btn btn btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            ƒ functions
+                        </button>
+                        <ul class="dropdown-menu pt-2 p-0" style="width: 225px;">
+                            <div class="container-fluid">
+
+                                <div class="row g-1 mb-2">
+                                    <div class="col-4">
+                                        <button
+                                            class="btn btn-outline-info w-100 d-flex justify-content-center align-items-center">
+                                            | X |
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center">
+                                            |_X_|
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center">
+                                            |<sup>-</sup>X <sup>-</sup>|
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <div class="row g-1 mb-2">
+                                    <div class="col-4">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center">
+                                            rand
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center">
+                                            <i class="bi bi-arrow-right-short"></i>deg
+                                        </button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button
+                                            class="btn btn-outline-primary w-100 d-flex justify-content-center align-items-center">
+                                            <i class="bi bi-arrow-right-short"></i>dms
+                                        </button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- button grid for scientific -->
+                <div class="d-flex flex-grow-1 bg-light d-none" id="scientific-calc">
+                    <div class="row d-flex flex-column flex-grow-1">
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="2**">2<sup>nd</sup></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="**2">x²</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="Math.sqrt("><sup>2</sup>&radic;x</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="**">x<sup>y</sup></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="10**">10<sup>x</sup></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="Math.log10(">log</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="Math.log(">ln</button>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-column flex-grow-1 ">
+                        <div class="col ">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="Math.PI">&pi;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="1/x"><sup>1</sup>/<sub>x</sub></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="(">&#40;</button>
+                        </div>
+                        <div class="col ">
+                            <button class="btn h-100 w-100 bg-white border rounded-4 calc-btn" data-value="7">7</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 bg-white border rounded-4 calc-btn" data-value="4">4</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 bg-white border rounded-4 calc-btn" data-value="1">1</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 bg-white border rounded-4 calc-btn" data-value="-">+/-</button>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-column flex-grow-1">
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="Math.E">e</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="Math.abs(">|x|</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value=")">&#41;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="8">8</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="5">5</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="2">2</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="0">0</button>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-column flex-grow-1">
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="C">C</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="Math.exp(">exp</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="factorial">n!</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="9">9</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="6">6</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="3">3</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value=".">.</button>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-column flex-grow-1">
+                        <div class="col">
+                            <button class="btn h-100 w-100  border rounded-4 calc-btn" data-value="backspace"><i class="bi bi-backspace"></i></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100  border rounded-4 calc-btn" data-value="%">mod</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="/">&divide;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="*">&times;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="-">&minus;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="+">+</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="="
+                                style="background-color: #0067C0;color: white;">=</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+                <!-- for standard -->
+
+                <div class="d-flex flex-grow-1 bg-light" id="standard-calc">
+                    <div class="row d-flex flex-column flex-grow-1 ">
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="%">&percnt;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="1/x"><sup>1</sup>/ <sub>x</sub></button>
+                        </div>
+                        <div class="col ">
+                            <button class="btn h-100 w-100 bg-white border rounded-4 calc-btn" data-value="7">7</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 bg-white border rounded-4 calc-btn" data-value="4">4</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 bg-white border rounded-4 calc-btn" data-value="1">1</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 bg-white border rounded-4 calc-btn" data-value="-">+/-</button>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-column flex-grow-1">
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="C">CE</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="**2">x<sup>2</sup></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="8">8</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="5">5</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="2">2</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="0">0</button>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-column flex-grow-1">
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="C">C</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="Math.sqrt("><sup>2</sup>&radic;x</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="9">9</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="6">6</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value="3">3</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 bg-white calc-btn" data-value=".">.</button>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-column flex-grow-1">
+                        <div class="col">
+                            <button class="btn h-100 w-100  border rounded-4 calc-btn" data-value="backspace"><i class="bi bi-backspace"></i></button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="/">&divide;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="*">&times;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="-">&minus;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="+">&plus;</button>
+                        </div>
+                        <div class="col">
+                            <button class="btn h-100 w-100 border rounded-4 calc-btn" data-value="="
+                                style="background-color: #0067C0;color: white;">&equals;</button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <!-- Right part for history -->
+            <div class="d-none d-lg-block d-flex w-100 bg-light" name="right part" id="history-sidebar">
+                <div class="p-2 m-3 d-flex flex-column">
+                    History
+                    <div class="border p-4 m-3" >
+                        <div id="history-list"></div>
+                    </div>
+                </div>
+                <div class="btn position-fixed bottom-0 end-0 m-3" >
+                    <button class="btn" id="deleteHistory"><i class="bi bi-trash"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <script src="aa.js"></script> -->
+
+    <script type="module" src="./js/calculator.js"></script>
+
+</body>
+
+</html>
