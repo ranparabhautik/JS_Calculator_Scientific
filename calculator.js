@@ -6,12 +6,10 @@ import { saveTheme, loadTheme, saveHistory, loadHistory, clearHistoryStorage } f
 class Calculator {
 
   constructor() {
-    // ── State ──
     this.expression  = "";
     this.historyData = [];
     this.degMode     = true;   // true = DEG, false = RAD
 
-    // ── DOM refs ──
     this.expressionDisplay = document.getElementById("expression");
     this.resultDisplay     = document.getElementById("result");
     this.historyList       = document.getElementById("history-list");
@@ -20,16 +18,16 @@ class Calculator {
     this.btnStandard       = document.getElementById("offcanvas-standard");
     this.btnScientific     = document.getElementById("offcanvas-scienctific");
 
-    // ── Boot ──
+
     this.loadTheme();
     this.loadHistory();
     this.showStandard();
     this.bindEvents();
   }
 
-  // =============================================
+
   //  DISPLAY
-  // =============================================
+
 
   updateExpression() {
     this.expressionDisplay.innerText = this.expression || "0";
@@ -45,12 +43,20 @@ class Calculator {
     this.updateExpression();
   }
 
-  // =============================================
+//  showError(msg) {
+//     this.updateResult(msg);
+//     this.expression = "";
+//     this.updateExpression();
+//   }
+
+
+
+  
   //  THEME
-  // =============================================
+  
 
   loadTheme() {
-    const saved = loadTheme();   // from storage.js
+    const saved = loadTheme();   // this is from storage.js
     if (saved === "dark") {
       document.body.classList.add("dark-mode");
       this.darkToggle.checked = true;
@@ -62,12 +68,11 @@ class Calculator {
     saveTheme(isDark);           // from storage.js
   }
 
-  // =============================================
   //  HISTORY
-  // =============================================
+  
 
   loadHistory() {
-    loadHistory().then((data) => {      // from storage.js
+    loadHistory().then((data) => {      // this from storage.js
       this.historyData = data;
       this.renderHistory();
     });
@@ -97,9 +102,7 @@ class Calculator {
     }
   }
 
-  // =============================================
-  //  CORE BUTTON HANDLER
-  // =============================================
+  // main logic 
 
   handleButton(val) {
     switch (val) {
@@ -116,7 +119,7 @@ class Calculator {
         break;
 
       case "=": {
-        const error = validate(this.expression);   // from validator.js
+        const error = validate(this.expression);   // this is from validator.js
         if (error) { this.showError(error); break; }
         try {
           let res = safeEval(this.expression, this.degMode);  // from math.js
@@ -170,7 +173,7 @@ class Calculator {
         break;
 
       case "Math.sqrt(": {
-        const num = extractLastNumber(this.expression);   // from math.js
+        const num = extractLastNumber(this.expression);   // from from math.js
         if (num) {
           this.expression = this.expression.slice(0, -num.length);
           this.expression += `Math.sqrt(${num})`;
@@ -182,7 +185,7 @@ class Calculator {
       }
 
       case "1/x": {
-        const num = extractLastNumber(this.expression);   // from math.js
+        const num = extractLastNumber(this.expression);   //this is from math.js
         if (!num) break;
         if (parseFloat(num) === 0) { this.showError("Cannot divide by zero"); break; }
         this.expression = this.expression.slice(0, -num.length);
@@ -192,7 +195,7 @@ class Calculator {
       }
 
       case "**2": {
-        const num = extractLastNumber(this.expression);   // from math.js
+        const num = extractLastNumber(this.expression);
         if (!num) break;
         this.expression = this.expression.slice(0, -num.length);
         this.expression += `(${num}**2)`;
@@ -242,6 +245,11 @@ class Calculator {
         document.querySelector(".deg-btn").textContent = this.degMode ? "DEG" : "RAD";
         break;
 
+        // case "DEG":
+        // this.degMode = !this.degMode;
+        // document.querySelector(".deg-btn").textContent = degMode ? "DEG" : "RAD";
+        // break;
+
       default:
         this.expression += val;
         this.updateExpression();
@@ -249,9 +257,9 @@ class Calculator {
     }
   }
 
-  // =============================================
+  
   //  MODE SWITCHING
-  // =============================================
+  
 
   showStandard() {
     document.getElementById("scientific-calc").classList.add("d-none");
@@ -272,9 +280,8 @@ class Calculator {
     if (oc) oc.hide();
   }
 
-  // =============================================
-  //  KEYBOARD
-  // =============================================
+  
+  //  Keyboard input
 
   handleKeyboard(e) {
     const map = {
@@ -288,19 +295,16 @@ class Calculator {
     if (map[e.key]) this.handleButton(map[e.key]);
   }
 
-  // =============================================
-  //  BIND EVENTS
-  // =============================================
 
   bindEvents() {
-    // Event delegation — all calc buttons
+    // Event delegation for all calculator buttons
     document.addEventListener("click", (e) => {
       const btn = e.target.closest(".calc-btn");
       if (!btn) return;
       this.handleButton(btn.dataset.value);
     });
 
-    // Mode toggle
+    // toggle for canvs
     this.btnStandard.addEventListener("click", () => {
       this.showStandard();
       this.closeOffcanvas();
@@ -311,7 +315,7 @@ class Calculator {
       this.closeOffcanvas();
     });
 
-    // Dark mode
+    // switch dark mode
     this.darkToggle.addEventListener("change", () => {
       this.toggleDarkMode(this.darkToggle.checked);
     });
